@@ -5,7 +5,6 @@ require 'functions.php';
 //menggunakan function untuk menjalankan perintah query 
 $games = query ("SELECT * FROM game");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +16,7 @@ $games = query ("SELECT * FROM game");
 
 <body>
     <h1>Daftar Game Favorit</h1>
+    <a href="add.php">Klik untuk tambah data</a> <br> <br> 
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>NO</th>
@@ -29,18 +29,19 @@ $games = query ("SELECT * FROM game");
         </tr>
 
         <?php $i = 1; ?>
-        <?php foreach ($games as $game) : ?>
+        <?php foreach ($games as $game) : ?> 
             <tr>
                 <td><?= $i; ?></td>
                 <td>
-                    <a href="#">Edit</a> |
-                    <a href="#">Hapus</a>
+                    <!-- aksi berasal dari function, yang mana PRIMARY key dimasukan ke url lewat "file.php?value=" -->
+                    <a href="#>">Edit</a> |
+                    <a href="delete.php?id= <?= $game["id"];?>" onclick="return confirm('yakin?');">Hapus</a>
                 </td>
-                <td><img src="asset/<?= $game["Poster"] ?>" alt="_<?= $game["Judul"] ?>" style="width: 100px; height: 100px;"></td>
-                <td><?= $game["Judul"] ?></td>
-                <td><?= $game["Genre"] ?></td>
-                <td><?= $game["Tersedia"] ?></td>
-                <td><?= $game["Developer"] ?></td>
+                <td><img src="asset/<?= $game["poster"] ?>" alt="_<?= $game["judul"] ?>" style="width: 100px; height: 100px;"></td>
+                <td><?= $game["judul"] ?></td>
+                <td><?= $game["genre"] ?></td>
+                <td><?= $game["tersedia"] ?></td>
+                <td><?= $game["developer"] ?></td>
             </tr>
             <?php $i++; ?><?php endforeach; ?>
     </table>
