@@ -34,7 +34,7 @@ $games = query ("SELECT * FROM game");
                 <td><?= $i; ?></td>
                 <td>
                     <!-- aksi berasal dari function, yang mana PRIMARY key dimasukan ke url lewat "file.php?value=" -->
-                    <a href="#>">Edit</a> |
+                    <a href="update.php?id= <?= $game["id"];?>">Edit</a> |
                     <a href="delete.php?id= <?= $game["id"];?>" onclick="return confirm('yakin?');">Hapus</a>
                 </td>
                 <td><img src="asset/<?= $game["poster"] ?>" alt="_<?= $game["judul"] ?>" style="width: 100px; height: 100px;"></td>
