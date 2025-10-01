@@ -3,7 +3,13 @@
 require 'functions.php';
 
 //menggunakan function untuk menjalankan perintah query 
+// ORDER BY = mengurutkan dari yang terkecil(ASC) dan mengurutkan dari yang terbesar(DESC)
 $games = query ("SELECT * FROM game");
+
+if(isset($_POST["cari"])) {
+    $games = cari($_POST["keyword"]);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +22,16 @@ $games = query ("SELECT * FROM game");
 
 <body>
     <h1>Daftar Game Favorit</h1>
-    <a href="add.php">Klik untuk tambah data</a> <br> <br> 
+    <a href="add.php">Klik untuk tambah data</a> 
+    <br><br> 
+    <form action="" method="post">
+        <!-- autofocus = langsung berada di pengimputan sesaat setelah melakukan revrase -->
+        <!-- palaceholder = memberikan panduan teks yang akan menghilag ketika diketikan sesuatu -->
+        <!-- autocomplate = menyembunyikan histori pada tag input -->
+        <input type="text" name="keyword"  size="40px" autofocus placeholder="masukan keyword pencarian..." autocomplete="off"> 
+        <button type="submit" name="cari">cari</button>
+    </form> 
+    <br><br> 
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>NO</th>

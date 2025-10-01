@@ -45,13 +45,12 @@ function ubah($data) {
     $developer = htmlspecialchars($data["developer"]);
     $poster = htmlspecialchars($data["poster"]);
     // insert data
-    $query = "UPDATE game SET 
-                judul = '$judul', 
-                genre = '$genre', 
-                tersedia = '$tersedia', 
-                developer = '$developer', 
-                poster = '$poster' 
-                WHERE id = $id";
+    $query = "UPDATE game SET judul = '$judul', genre = '$genre', tersedia = '$tersedia', developer = '$developer', poster = '$poster' WHERE id = $id";
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn); // meberikan nilai (+1) jika perintah berhasil dijaankan
 };
+
+function cari ($keyword) {
+    $query = "SELECT * FROM game WHERE judul LIKE '%$keyword%' OR genre LIKE '%$keyword%' OR tersedia LIKE '%$keyword%' OR developer LIKE '%$keyword%'";
+    return query($query);
+}
