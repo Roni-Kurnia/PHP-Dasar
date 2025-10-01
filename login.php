@@ -29,6 +29,7 @@ if(isset($_POST["login"])) {
         $row = mysqli_fetch_assoc($result);
         // decode password(membandingkan string)
         if(password_verify($password, $row["password"])) {
+            // membuat session
             $_SESSION["login"] = true;
             // redirec ke index
             header("Location: index.php");

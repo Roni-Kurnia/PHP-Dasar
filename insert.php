@@ -1,7 +1,12 @@
 <?php 
 session_start();
 
-if (isset($_SESSION["login"])) {
+if (!isset($_SESSION["login"])) {
+    header("Location: index.php");
+    exit;
+}
+
+if (isset($_POST["batal"])) {
     header("Location: index.php");
     exit;
 }
@@ -32,25 +37,28 @@ if(isset($_POST["submit"]) ) {
         <ul>
             <li>
                 <label for="judul">Judul: </label>
-                <input type="text" name="judul" id="judul" require>
+                <input type="text" name="judul" id="judul" >
             </li>
             <li>
                 <label for="genre">Genre: </label>
-                <input type="text" name="genre" id="genre" required>
+                <input type="text" name="genre" id="genre" >
             </li>
             <li>
                 <label for="tersedia">Tersedia: </label>
-                <input type="text" name="tersedia" id="tersedia" required>
+                <input type="text" name="tersedia" id="tersedia" >
             </li>
             <li>
                 <label for="developer">Developer: </label>
-                <input type="text" name="developer" id="developer" required>
+                <input type="text" name="developer" id="developer" >
             </li>
             <li>
                 <label for="poster">Poster: </label>
                 <input type="file" name="poster" id="poster">
             </li>
-            <li><button type="submit" name="submit">Kirim</button></li>
+            <li>
+                <button type="submit" name="submit">Kirim</button>
+                <button type="submit" name="batal">batal</button>
+            </li>
         </ul>
     </form>
 </body>
