@@ -1,6 +1,12 @@
 <?php
+session_start();
 // mengambil function dari file lain
 require 'functions.php';
+
+if (!isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
 
 //menggunakan function untuk menjalankan perintah query 
 // ORDER BY = mengurutkan dari yang terkecil(ASC) dan mengurutkan dari yang terbesar(DESC)
@@ -21,8 +27,9 @@ if(isset($_POST["cari"])) {
 </head>
 
 <body>
+    <button style="float: right;" type="submit"><a href="logout.php">logout</a></button>
     <h1>Daftar Game Favorit</h1>
-    <a href="add.php">Klik untuk tambah data</a> 
+    <a href="insert.php">Klik untuk tambah data</a> 
     <br><br> 
     <form action="" method="post">
         <!-- autofocus = langsung berada di pengimputan sesaat setelah melakukan revrase -->

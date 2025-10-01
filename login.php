@@ -1,25 +1,41 @@
 <?php 
+session_start();
 require 'functions.php';
+
+if (isset($_SESSION["login"])) {
+    header("Location: index.php");
+    exit;
+}
+
+if(isset($_POST["reg"])) {
+    header("Location: registrasi.php");
+    exit;
+}
 
 if(isset($_POST["login"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
-    
+
     $result = mysqli_query($conn,"SELECT * FROM users WHERE username = '$username'");
+    
+    if(empty($username && $password)){
+        echo "<script> alert(' ada kolom yang belum diisi');</script>";
+        exit;      
+    }
 
     // menegecek pengembalian nilai baris
-    if (mysqli_num_rows($result) === 1 ) {
+    if (mysqli_num_rows($result) > 0 ) {
         // cek password 
         $row = mysqli_fetch_assoc($result);
         // decode password(membandingkan string)
         if(password_verify($password, $row["password"])) {
+            $_SESSION["login"] = true;
             // redirec ke index
             header("Location: index.php");
             exit;
         }
-    }
-
-    $error = true;
+    } 
+    $error = true;   
 }
 ?>
 
@@ -46,7 +62,10 @@ if(isset($_POST["login"])) {
                 <label name="password";>password :</label>
                 <input type="password"; name="password"; id="password";>
             </li>
-            <li><button type="submit" name="login">login</button></li>
+            <li>
+                <button type="submit" name="login">login</button>
+                <button type="submit" name="reg">registrasi</button>
+            </li>
         </ul>
     </form>
 </body>

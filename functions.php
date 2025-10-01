@@ -77,7 +77,6 @@ function hapus($id) {
     return mysqli_affected_rows($conn);
 }
 
-
 function ubah($data) {
     global $conn;
      // validasi data / value
@@ -111,9 +110,13 @@ function registrasi ($data) {
 
     // memaksa input untuk menggunakan huruf kecil(strtolower) dan menghilangkan/membersihkan simbol(stripslashes)
     $username = strtolower(stripslashes($data["username"]));
-
     $password = mysqli_real_escape_string($conn,  $data["password"]);
     $password2 = mysqli_real_escape_string($conn,$data["password2"]);
+
+    if(empty($username && $password && $password2)){
+        echo "<script> alert(' ada kolom yang belum diisi');</script>";
+        return false;       
+    }
 
     // cek username sudah ada belum
     $result = mysqli_query($conn, "SELECT username FROM users WHERE username = '$username'");

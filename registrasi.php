@@ -1,9 +1,21 @@
 <?php
+session_start();
+
+if (isset($_SESSION["login"])) {
+    header("Location: index.php");
+    exit;
+}
+
+if(isset($_POST["in"])) {
+    header("Location: login.php");
+    exit;
+}
+
 require 'functions.php';
 
 if (isset($_POST["register"])) {
     if (registrasi($_POST) > 0) {
-        echo "<script> alert('registrasi sukses');</script>"; // document.location.href = 'index.php';
+        echo "<script> alert('registrasi sukses');  document.location.href = 'login.php';</script>";
     } else {
         echo mysqli_error($conn);
     }
@@ -59,6 +71,7 @@ if (isset($_POST["register"])) {
             </div>
             <div class="tombol">
                 <button type="submit" name="register">Register</button>
+                <button type="submit" name="in">login</button>
             </div>
         </div>
     </form>
