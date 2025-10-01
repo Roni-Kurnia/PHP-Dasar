@@ -15,6 +15,7 @@ if(isset($_POST["submit"]) ) {
         echo "<script> alert('data gagal diubah');  document.location.href = 'index.php'; </script>";
     }
 };
+
 ?>
 
 <!DOCTYPE html>
@@ -26,9 +27,15 @@ if(isset($_POST["submit"]) ) {
 </head>
 <body>
     <h1>Update data</h1>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $pk["id"];?>">
+        <input type="hidden" name="oldPoster" value="<?= $pk["poster"];?>">
         <ul>
+            <li>
+                <label for="poster">Poster: </label><br>
+                <img src="asset/<?= $pk['poster'] ?>" alt="_<?= $pk["judul"];?>" style="width: 100px; height: 100px;"><br>
+                <input type="file" name="poster" id="poster">
+            </li>            
             <li>
                 <label for="judul">Judul: </label>
                 <input type="text" name="judul" id="judul" value="<?= $pk["judul"];?>">
@@ -44,10 +51,6 @@ if(isset($_POST["submit"]) ) {
             <li>
                 <label for="developer">Developer: </label>
                 <input type="text" name="developer" id="developer" value="<?= $pk["developer"];?>">
-            </li>
-            <li>
-                <label for="poster">Poster: </label>
-                <input type="text" name="poster" id="poster" value="<?= $pk["poster"];?>">
             </li>
             <li><button type="submit" name="submit">Kirim</button></li>
         </ul>
