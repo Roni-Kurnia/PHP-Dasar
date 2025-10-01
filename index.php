@@ -60,8 +60,5 @@ if(isset($_POST["cari"])) {
             </tr>
             <?php $i++; ?><?php endforeach; ?>
     </table>
-    <label name="pasword";>pasword</label>
-    <input type="text"; name="pasword"; id="pasword";>
 </body>
-
 </html>

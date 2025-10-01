@@ -123,7 +123,7 @@ function registrasi ($data) {
         return false;       
     }
 
-    // cek konfirmasi bassword
+    // cek konfirmasi password
     if($password !== $password2 ) {
         echo "<script> alert('password tidak sesuai');</script>";
         return false;
