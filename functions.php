@@ -105,3 +105,36 @@ function cari ($keyword) {
     $query = "SELECT * FROM game WHERE judul LIKE '%$keyword%' OR genre LIKE '%$keyword%' OR tersedia LIKE '%$keyword%' OR developer LIKE '%$keyword%'";
     return query($query);
 }
+
+function registrasi ($data) {
+    global $conn;
+
+    // memaksa input untuk menggunakan huruf kecil(strtolower) dan menghilangkan/membersihkan simbol(stripslashes)
+    $username = strtolower(stripslashes($data["username"]));
+
+    $password = mysqli_real_escape_string($conn,  $data["password"]);
+    $password2 = mysqli_real_escape_string($conn,$data["password2"]);
+
+    // cek username sudah ada belum
+    $result = mysqli_query($conn, "SELECT username FROM users WHERE username = '$username'");
+    
+    if (mysqli_fetch_assoc($result)) {
+        echo "<script> alert('username telah terdaftar');</script>";
+        return false;       
+    }
+
+    // cek konfirmasi bassword
+    if($password !== $password2 ) {
+        echo "<script> alert('password tidak sesuai');</script>";
+        return false;
+    }
+    
+    // enkripsi password
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    // tambahkan user baru ke database
+    $query = "INSERT INTO users VALUES('', '$username', '$password')";
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
