@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "@Roni123", "phpdasar");
+$conn = mysqli_connect("localhost", "root", "", "phpdasar");
 
 function query($query) {
     global $conn;
@@ -141,3 +141,4 @@ function registrasi ($data) {
 
     return mysqli_affected_rows($conn);
 }
+
