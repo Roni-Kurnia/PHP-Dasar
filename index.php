@@ -35,37 +35,40 @@ if(isset($_POST["cari"])) {
         <!-- autofocus = langsung berada di pengimputan sesaat setelah melakukan revrase -->
         <!-- palaceholder = memberikan panduan teks yang akan menghilag ketika diketikan sesuatu -->
         <!-- autocomplate = menyembunyikan histori pada tag input -->
-        <input type="text" name="keyword"  size="40px" autofocus placeholder="masukan keyword pencarian..." autocomplete="off"> 
-        <button type="submit" name="cari">cari</button>
+        <input type="text" name="keyword" id="keyword" size="40px" autofocus placeholder="masukan keyword pencarian..." autocomplete="off"> 
+        <button type="submit" name="cari" id="tombolCari">cari</button>
     </form> 
     <br><br> 
-    <table border="1" cellpadding="10" cellspacing="0">
-        <tr>
-            <th>NO</th>
-            <th>Aksi</th>
-            <th>Poster</th>
-            <th>Judul</th>
-            <th>Genre</th>
-            <th>Tersedia</th>
-            <th>Developer</th>
-        </tr>
-
-        <?php $i = 1; ?>
-        <?php foreach ($games as $game) : ?> 
+    <div id="container">
+        <table border="1" cellpadding="10" cellspacing="0">
             <tr>
-                <td><?= $i; ?></td>
-                <td>
-                    <!-- aksi berasal dari function, yang mana PRIMARY key dimasukan ke url lewat "file.php?value=" -->
-                    <a href="update.php?id= <?= $game["id"];?>">Edit</a> |
-                    <a href="delete.php?id= <?= $game["id"];?>" onclick="return confirm('yakin?');">Hapus</a>
-                </td>
-                <td><img src="asset/<?= $game["poster"] ?>" alt="_<?= $game["judul"] ?>" style="width: 100px; height: 100px;"></td>
-                <td><?= $game["judul"] ?></td>
-                <td><?= $game["genre"] ?></td>
-                <td><?= $game["tersedia"] ?></td>
-                <td><?= $game["developer"] ?></td>
+                <th>NO</th>
+                <th>Aksi</th>
+                <th>Poster</th>
+                <th>Judul</th>
+                <th>Genre</th>
+                <th>Tersedia</th>
+                <th>Developer</th>
             </tr>
-            <?php $i++; ?><?php endforeach; ?>
-    </table>
+
+            <?php $i = 1; ?>
+            <?php foreach ($games as $game) : ?> 
+                <tr>
+                    <td><?= $i; ?></td>
+                    <td>
+                        <!-- aksi berasal dari function, yang mana PRIMARY key dimasukan ke url lewat "file.php?value=" -->
+                        <a href="update.php?id= <?= $game["id"];?>">Edit</a> |
+                        <a href="delete.php?id= <?= $game["id"];?>" onclick="return confirm('yakin?');">Hapus</a>
+                    </td>
+                    <td><img src="asset/<?= $game["poster"] ?>" alt="_<?= $game["judul"] ?>" style="width: 100px; height: 100px;"></td>
+                    <td><?= $game["judul"] ?></td>
+                    <td><?= $game["genre"] ?></td>
+                    <td><?= $game["tersedia"] ?></td>
+                    <td><?= $game["developer"] ?></td>
+                </tr>
+                <?php $i++; ?><?php endforeach; ?>
+        </table>
+    </div>
+    <script src="js/script.js"></script>
 </body>
 </html>
