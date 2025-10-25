@@ -1,22 +1,19 @@
-// ambil element yang dibutuhkan
-var keyword = document.getElementById("keyword");
-var tombolCari = document.getElementById("tombolCari"); 
-var container = document.getElementById("container");
+$(document).ready(function() {
+    $('#tombolCari').hide();    
 
-// tambahkan event ketika berinteraksi dengan keyword
-keyword.addEventListener('keyup', function() {
+    // event ketika berinteraksi dengan keyword
+    $('#keyword').on('keyup', function() {
 
-    // buat objek ajax
-    var xhr = new XMLHttpRequest();
+        // munculkan icon loading
+        $('.loader').show();
 
-    // cek kesiapan ajax
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            container.innerHTML  = xhr.responseText;     
-        }
-    }
+        // ajax menggunakan load
+        // $('#container').load('ajax/game.php?keyword=' + $('#keyword').val());
 
-    // eksekusi ajax
-    xhr.open('GET', 'ajax/game.php?keyword=' + keyword.value, true);
-    xhr.send();
+        // ajax menggunakan $.get | data menggantikan xhr.responeTeks
+        $.get('ajax/game.php?keyword=' + $('#keyword').val(), function(data) {
+            $('#container').html(data);
+            $('.loader').hide();
+        })
+    });
 });

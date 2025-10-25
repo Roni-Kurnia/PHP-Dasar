@@ -1,4 +1,5 @@
 <?php
+sleep(1);
 $keyword = $_GET["keyword"];
 require "../functions.php";
 $query = "SELECT * FROM game WHERE judul LIKE '%$keyword%' OR genre LIKE '%$keyword%' OR tersedia LIKE '%$keyword%' OR developer LIKE '%$keyword%'";

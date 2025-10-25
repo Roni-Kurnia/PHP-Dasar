@@ -24,6 +24,18 @@ if(isset($_POST["cari"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/script.js"></script>
+    <style>
+        .loader {
+            width: 80px;
+            top: 100px;
+            left: 305px;
+            z-index: -1;
+            position: absolute;
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -32,13 +44,11 @@ if(isset($_POST["cari"])) {
     <a href="insert.php">Klik untuk tambah data</a> 
     <br><br> 
     <form action="" method="post">
-        <!-- autofocus = langsung berada di pengimputan sesaat setelah melakukan revrase -->
-        <!-- palaceholder = memberikan panduan teks yang akan menghilag ketika diketikan sesuatu -->
-        <!-- autocomplate = menyembunyikan histori pada tag input -->
         <input type="text" name="keyword" id="keyword" size="40px" autofocus placeholder="masukan keyword pencarian..." autocomplete="off"> 
         <button type="submit" name="cari" id="tombolCari">cari</button>
+        <img src="asset/loader.gif" class="loader">
     </form> 
-    <br><br> 
+    <br>
     <div id="container">
         <table border="1" cellpadding="10" cellspacing="0">
             <tr>
@@ -69,6 +79,5 @@ if(isset($_POST["cari"])) {
                 <?php $i++; ?><?php endforeach; ?>
         </table>
     </div>
-    <script src="js/script.js"></script>
 </body>
 </html>
